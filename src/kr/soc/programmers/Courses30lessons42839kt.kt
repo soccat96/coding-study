@@ -1,11 +1,16 @@
 package kr.soc.programmers
 
 class Courses30lessons42839kt {
-    fun solution(numbers: String): Int {
-        val numberList = numbers.toCharArray().map { it.toString() }
-        val numberSet = mutableSetOf<Int>()
+    companion object {
+        var numberSet = mutableSetOf<Int>()
+        var charNumberList: List<String>? = null
+    }
 
-        recursion(numberSet, numberList, mutableListOf<Int>(), "")
+    fun solution(numbers: String): Int {
+        charNumberList = numbers.toCharArray().map { it.toString() }
+        numberSet.clear()
+
+        recursion(charNumberList!!, mutableListOf<Int>(), "")
 
         var cnt = 0
         for (x in numberSet) {
@@ -34,7 +39,7 @@ class Courses30lessons42839kt {
         return true
     }
 
-    private fun recursion(numberSet: MutableSet<Int>, numberList: List<String>, indexArray: MutableList<Int>, s: String) {
+    private fun recursion(numberList: List<String>, indexArray: MutableList<Int>, s: String) {
         for (i in numberList.indices) {
             if (indexArray.contains(i)) { continue }
 
@@ -42,7 +47,7 @@ class Courses30lessons42839kt {
             numberSet.add(str.toInt())
             indexArray.add(i)
 
-            recursion(numberSet, numberList, indexArray, str)
+            recursion(numberList, indexArray, str)
 
             indexArray.remove(i)
         }

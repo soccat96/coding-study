@@ -10,7 +10,7 @@ class Courses30lessons42839kt {
         charNumberList = numbers.toCharArray().map { it.toString() }
         numberSet.clear()
 
-        recursion(charNumberList!!, mutableListOf<Int>(), "")
+        recursion(mutableListOf<Int>(), "")
 
         var cnt = 0
         for (x in numberSet) {
@@ -39,15 +39,15 @@ class Courses30lessons42839kt {
         return true
     }
 
-    private fun recursion(numberList: List<String>, indexArray: MutableList<Int>, s: String) {
-        for (i in numberList.indices) {
+    private fun recursion(indexArray: MutableList<Int>, s: String) {
+        for (i in charNumberList!!.indices) {
             if (indexArray.contains(i)) { continue }
 
-            val str = s + numberList[i]
+            val str = s + charNumberList!![i]
             numberSet.add(str.toInt())
             indexArray.add(i)
 
-            recursion(numberList, indexArray, str)
+            recursion(indexArray, str)
 
             indexArray.remove(i)
         }

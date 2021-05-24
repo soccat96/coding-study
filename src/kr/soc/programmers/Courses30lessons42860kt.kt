@@ -3,12 +3,12 @@ package kr.soc.programmers
 import kotlin.math.abs
 
 class Courses30lessons42860kt {
-    private val A_VALUE = 10
-    private val Z_VALUE = 35
+    private val aNumericValue = 10
+    private val zNumericValue = 35
 
     fun solution(name: String): Int {
         var result = ""
-        for (i in name.indices) {
+        repeat(name.length) {
             result += 'A'
         }
 
@@ -35,8 +35,8 @@ class Courses30lessons42860kt {
 
     private fun getLessThan(char: Char): Int {
         val value = Character.getNumericValue(char)
-        val aAbs = abs(A_VALUE - value)
-        val zAbs = abs(Z_VALUE - value) + 1
+        val aAbs = abs(aNumericValue - value)
+        val zAbs = abs(zNumericValue - value) + 1
 
         if(aAbs < zAbs) {
             return aAbs

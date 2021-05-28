@@ -14,48 +14,8 @@ class Courses30lessons67257Test {
         Courses30lessons67257 c = new Courses30lessons67257();
         assertEquals(60420, c.solution("100-200*300-500+20"));
         assertEquals(300, c.solution("50*6-3*2"));
-    }
-
-    @Test
-    void getFrontNumber() {
-        Courses30lessons67257 c = new Courses30lessons67257();
-        Map<String, Object> frontNumber = c.getFrontNumber("100-200+300-400", 7);
-        assertEquals(3, frontNumber.get("index"));
-        assertEquals(200l, frontNumber.get("number"));
-    }
-
-    @Test
-    void getBackNumber() {
-        Courses30lessons67257 c = new Courses30lessons67257();
-        Map<String, Object> backNumber = c.getBackNumber("100-200+300-400", 7);
-        assertEquals(3, backNumber.get("index"));
-        assertEquals(300l, backNumber.get("number"));
-    }
-
-    @Test
-    void recursiveMulti() {
-        Courses30lessons67257 c = new Courses30lessons67257();
-        assertEquals("1000000", c.recursiveMulti("100*100*100"));
-        assertEquals("100-10000", c.recursiveMulti("100-100*100"));
-        assertEquals("10000-100", c.recursiveMulti("100*100-100"));
-        assertEquals("100-100-100", c.recursiveMulti("100-100-100"));
-    }
-
-    @Test
-    void recursivePlus() {
-        Courses30lessons67257 c = new Courses30lessons67257();
-        assertEquals("300", c.recursivePlus("100+100+100"));
-        assertEquals("100-200", c.recursivePlus("100-100+100"));
-        assertEquals("200-100", c.recursivePlus("100+100-100"));
-        assertEquals("100-100-100", c.recursivePlus("100-100-100"));
-    }
-
-    @Test
-    void recursiveMinus() {
-        Courses30lessons67257 c = new Courses30lessons67257();
-        assertEquals("-100", c.recursiveMinus("100-100-100"));
-        assertEquals("0*100", c.recursiveMinus("100-100*100"));
-        assertEquals("100*0", c.recursiveMinus("100*100-100"));
-        assertEquals("100*100*100", c.recursiveMinus("100*100*100"));
+        assertEquals(1248000, c.solution("200-300-500-600*40+500+500"));
+        assertEquals(24, c.solution("2*2*2*2*2-2*2*2"));
+        assertEquals(6083974714l, c.solution("177-661*999*99-133+221+334+555-166-144-551-166*166-166*166-133*88*55-11*4+55*888*454*12+11-66+444*99"));
     }
 }

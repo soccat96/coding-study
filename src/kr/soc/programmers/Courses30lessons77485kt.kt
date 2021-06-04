@@ -23,21 +23,15 @@ class Courses30lessons77485kt {
         }
 
         queries.forEach{it1 ->
-            var minValue = Int.MAX_VALUE
-
             val pointList = getPointList(it1)
             pointList.forEach { it2 ->
                 it2.value = rc[it2.row][it2.col]
             }
             pointList.forEach { it2 ->
-                if (it2.value < minValue) {
-                    minValue = it2.value
-                }
-
                 rc[it2.nextRow][it2.nextCol] = it2.value
             }
 
-            answer.add(minValue)
+            answer.add(pointList.minOf { it.value })
         }
 
         return answer.toIntArray()

@@ -1,6 +1,5 @@
 package kr.soc.programmers.courses30
 
-import kr.soc.programmers.courses30.Lessons42842kt
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

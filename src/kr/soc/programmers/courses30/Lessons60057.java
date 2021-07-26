@@ -21,20 +21,13 @@ public class Lessons60057 {
 
         for (int i = 1; i <= original.length(); i++) {
             List<String> cutList = cutString(original, i);
-
-            String result = original;
-            for (int j = 0; j < cutList.size(); j++) {
-                String cut = cutList.get(j);
-                result = replaceString(changeString(result, cut), cut);
-            }
-
-            set.add(result);
+            set.add(getResultString(original, cutList, i));
         }
 
         return new ArrayList<>(set);
     }
 
-    public List<String> cutString(String string, int number) {
+    public List<String> cutString(final String string, int number) {
         Set<String> set = new HashSet<>();
 
         int start = 0;
@@ -47,58 +40,69 @@ public class Lessons60057 {
         return new ArrayList<>(set);
     }
 
-    public String replaceString(final String string, String target) {
+    public String getResultString(final String string, List<String> cutList, final int length) {
         String result = "";
 
-        if (string.indexOf("#") != -1) {
-            String change = changeString(string, target);
-
-            int count = 0;
-            while (0 < change.length()) {
-                char c = change.charAt(0);
-
-                if (c == '#') {
-                    count++;
-                    change = change.replaceFirst("#", "");
-                }
-
-                if (c != '#') {
-                    if (count == 0) {
-                        result += c;
-                        change = change.replaceFirst(String.valueOf(c), "");
-                    }
-                    if (count == 1) {
-                        result += target;
-                    }
-                    if (1 < count) {
-                        result += count + target;
-                    }
-
-                    count = 0;
-                }
-            }
-
-            if (change.equals("") && count != 0) {
-                if (count == 1) {
-                    result += target;
-                }
-                if (count != 1) {
-                    result += count + target;
-                }
-            }
-
-            return result;
+        List<String> piecesOfString = getPiecesOfString(string, length);
+        for (int i=0; i<cutList.size(); i++) {
+            String cut = cutList.get(i);
+            piecesOfString = replaceStringList(piecesOfString, cut);
         }
-
-        return string;
-    }
-
-    public String changeString(final String string, String param) {
-        String result = string;
-        while (result.indexOf(param) != -1) {
-            result = result.replaceFirst(param, "#");
+        for (String x : piecesOfString) {
+            result += x;
         }
 
         return result;
+    }
+
+    public List<String> replaceStringList(List<String> piecesOfString, final String target) {
+        ArrayList<String> returnList = new ArrayList<>();
+
+        int count = 0;
+        while (0 < piecesOfString.size()) {
+            String s = piecesOfString.get(0);
+
+            if (s.equals(target)) {
+                count++;
+            }
+
+            if (!s.equals(target)) {
+                if (count == 1) {
+                    returnList.add(target);
+                }
+                if (1 < count) {
+                    returnList.add(count + target);
+                }
+                returnList.add(s);
+
+                count = 0;
+            }
+
+            piecesOfString.remove(0);
+        }
+
+        if (piecesOfString.size() == 0 && count != 0) {
+            if (count <= 1) {
+                returnList.add(target);
+            }
+            if (1 < count) {
+                returnList.add(count + target);
+            }
+        }
+
+        return returnList;
+    }
+
+    public List<String> getPiecesOfString(final String string, final int length) {
+        ArrayList<String> returnList = new ArrayList<>();
+
+        String temp = string;
+        while (length < temp.length()) {
+            returnList.add(temp.substring(0, length));
+            temp = temp.substring(length);
+        }
+        returnList.add(temp);
+
+        return returnList;
     }
 }

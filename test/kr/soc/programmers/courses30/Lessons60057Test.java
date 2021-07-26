@@ -43,18 +43,51 @@ class Lessons60057Test {
     }
 
     @Test
-    void replaceString() {
+    void getResultString() {
         Lessons60057 l = new Lessons60057();
-        assertThat(l.replaceString("ababababab", "ab")).isEqualTo("5ab");
-        assertThat(l.replaceString("ababcdcdababcdcd", "ab")).isEqualTo("2abcdcd2abcdcd");
+        assertThat(
+                l.getResultString(
+                        "ababcdcdababcdcd",
+                        l.cutString("ababcdcdababcdcd", 2),
+                        2
+                )
+        ).isEqualTo("2ab2cd2ab2cd");
+        assertThat(
+                l.getResultString(
+                        "ababcdcdabcdabcdefcdcdx",
+                        l.cutString("ababcdcdabcdabcdefcdcdx", 2),
+                        2
+                )
+        ).isEqualTo("2ab2cdabcdabcdef2cdx");
     }
 
     @Test
-    void changeString() {
+    void replaceStringList() {
         Lessons60057 l = new Lessons60057();
-        assertThat(l.changeString("ababababab", "ab")).isEqualTo("#####");
-        assertThat(l.changeString("ababcdcdababcdcd", "ab")).isEqualTo("##cdcd##cdcd");
-        assertThat(l.changeString("ababcdcdabcdcd", "ab")).isEqualTo("##cdcd#cdcd");
-        assertThat(l.changeString("ababcdcdabcdabcdefcdcd", "ab")).isEqualTo("##cdcd#cd#cdefcdcd");
+        assertThat(
+                l.replaceStringList(
+                        l.getPiecesOfString("ababababab", "ab".length()),
+                        "ab"
+                )
+        ).hasSameElementsAs(Arrays.asList(new String[]{"5ab"}));
+        assertThat(
+                l.replaceStringList(
+                        l.getPiecesOfString("ababcdcdababcdcd", "ab".length()),
+                        "ab"
+                )
+        ).hasSameElementsAs(Arrays.asList(new String[]{"2ab", "cd", "cd", "2ab", "cd", "cd"}));
+    }
+
+    @Test
+    void getPieceOfString() {
+        Lessons60057 l = new Lessons60057();
+        assertThat(l.getPiecesOfString("ababcdcdabcdabcdefcdcd", 2))
+                .hasSameElementsAs(Arrays.asList(new String[]{
+                        "ab", "ab", "cd", "cd", "ab", "cd", "ab", "cd", "ef", "cd", "cd"
+                }));
+        assertThat(l.getPiecesOfString("ababcdcdabcdabcdefcdcdx", 2))
+                .hasSameElementsAs(Arrays.asList(new String[]{
+                        "ab", "ab", "cd", "cd", "ab", "cd", "ab", "cd", "ef", "cd", "cd", "x"
+                }));
     }
 }

@@ -6,37 +6,37 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class Lessons17678 {
-    private static final LocalTime START_TIME = LocalTime.of(9, 0, 0, 0);
-
     public String solution(int n, int t, int m, String[] timetable) {
+        final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+        final LocalTime SHUTTLE_START_TIME = LocalTime.of(9, 0, 0, 0);
+        final LocalTime SHUTTLE_LAST_TIME = SHUTTLE_START_TIME.plusMinutes((long) (n - 1) * t);
 //        final int TOTAL_COUNT = n * m;
-        final LocalTime LAST_TIME = START_TIME.plusMinutes((long) (n - 1) * t);
 
-        LinkedList<LocalTime> localTimeLinkedList = new LinkedList<>();
+        LinkedList<LocalTime> crewList = new LinkedList<>();
         for (String s : timetable) {
-            LocalTime crew = LocalTime.parse(s);
-            if (!crew.isAfter(LAST_TIME)) localTimeLinkedList.add(crew);
+            LocalTime crew = LocalTime.parse(s, FORMATTER);
+            if (!crew.isAfter(SHUTTLE_LAST_TIME)) crewList.add(crew);
         }
-        Collections.sort(localTimeLinkedList);
+        Collections.sort(crewList);
 //        final int COMPETITOR_COUNT = localTimeLinkedList.size();
 
-        LocalTime startLt = START_TIME.plusNanos(0);
+        LocalTime startLt = SHUTTLE_START_TIME.plusNanos(0);
         LocalTime lastCrew = LocalTime.of(23, 59, 0, 0);
         for (int i=0; i<n; i++) {
             if (i!=0) startLt = startLt.plusMinutes(t);
 
             int cnt = 0;
-            while (!localTimeLinkedList.isEmpty()) {
-                LocalTime crew = localTimeLinkedList.getFirst();
+            while (!crewList.isEmpty()) {
+                LocalTime crew = crewList.getFirst();
                 if (crew.isBefore(startLt) || crew.equals(startLt)) {
-                    localTimeLinkedList.pollFirst();
+                    crewList.pollFirst();
                     lastCrew = crew.plusNanos(0);
                     cnt++;
                 }
 
                 if (m <= cnt) {
                     if (i == n - 1) {
-                        return lastCrew.minusMinutes(1).format(DateTimeFormatter.ofPattern("HH:mm"));
+                        return lastCrew.minusMinutes(1).format(FORMATTER);
                     }
 
                     break;
@@ -46,6 +46,6 @@ public class Lessons17678 {
             }
         }
 
-        return startLt.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return startLt.format(FORMATTER);
     }
 }

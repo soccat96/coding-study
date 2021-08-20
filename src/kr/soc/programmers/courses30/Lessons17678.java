@@ -35,7 +35,7 @@ public class Lessons17678 {
                 }
 
                 if (m <= cnt) {
-                    if (i == n - 1) {
+                    if (startLt.equals(SHUTTLE_LAST_TIME)) {
                         return lastCrew.minusMinutes(1).format(FORMATTER);
                     }
 

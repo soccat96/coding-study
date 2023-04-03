@@ -1,10 +1,9 @@
 package kr.soc.programmers;
 
-import kr.soc.programmers.courses30.Lessons64061kt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Lessons64061Test {
     private Lessons64061kt lessons64061Kt;

@@ -1,6 +1,5 @@
 package kr.soc.programmers
 
-import kr.soc.programmers.courses30.Lessons67257kt
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

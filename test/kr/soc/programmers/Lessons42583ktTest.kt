@@ -1,9 +1,7 @@
 package kr.soc.programmers
 
-import kr.soc.programmers.courses30.Lessons42583kt
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 internal class Lessons42583ktTest {
 

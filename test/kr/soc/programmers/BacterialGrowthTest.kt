@@ -2,7 +2,6 @@ package kr.soc.programmers
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import kotlin.math.pow
 
 class BacterialGrowthTest {
     @Test

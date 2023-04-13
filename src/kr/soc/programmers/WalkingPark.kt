@@ -34,6 +34,7 @@ class WalkingPark {
                 'S' -> moveH(n)
             }
         }
+
         private fun moveW(n: Int) {
             val v = this.w + n
 
@@ -51,6 +52,7 @@ class WalkingPark {
 
             this.w = v
         }
+
         private fun moveH(n: Int) {
             val v = this.h + n
 
@@ -68,12 +70,13 @@ class WalkingPark {
 
             this.h = v
         }
+
         fun initPark(park: Array<String>) {
             this.park = Array(park.size) { IntArray(park[0].length) }
 
             for ((h, str) in park.withIndex()) {
                 for ((w, char) in str.withIndex()) {
-                    when (park[h][w]) {
+                    when (char) {
                         'S' -> {
                             this.h = h
                             this.w = w

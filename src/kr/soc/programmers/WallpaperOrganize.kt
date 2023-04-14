@@ -5,7 +5,7 @@ class WallpaperOrganize {
         return Wallpaper(wallpaper).getAnswer()
     }
 
-    class Wallpaper(private val wallpaper: Array<String>) {
+    class Wallpaper(wallpaper: Array<String>) {
         private var iconCnt = 0
         private var minX = wallpaper[0].length - 1
         private var minY = wallpaper.size - 1
@@ -28,10 +28,10 @@ class WallpaperOrganize {
         }
 
         fun getAnswer(): IntArray {
-            if (this.iconCnt == 0) {
-                return intArrayOf(this.minY, this.minX, this.minY + 1, this.minX + 1)
+            return if (this.iconCnt == 0) {
+                intArrayOf(this.minY, this.minX, this.minY + 1, this.minX + 1)
             } else {
-                return intArrayOf(this.minY, this.minX, this.maxY + 1, this.maxX + 1)
+                intArrayOf(this.minY, this.minX, this.maxY + 1, this.maxX + 1)
             }
         }
     }

@@ -2,7 +2,7 @@ package kr.soc.programmers
 
 class PasswordBetweenTwoOfUs {
     fun solution(s: String, skip: String, index: Int): String {
-        var answer: String = ""
+        var answer = ""
         val a = 'a'.code
         val z = 'z'.code
         val list = skip.toCharArray().map {

@@ -16,13 +16,17 @@ class SubString {
             val first = ss.first()
             ss = ss.substring(1, ss.length)
 
-            if (target == null) {
-                target = first
-                targetCnt++
-            } else if (target == first) {
-                targetCnt++
-            } else {
-                compareCnt++
+            when (target) {
+                null -> {
+                    target = first
+                    targetCnt++
+                }
+                first -> {
+                    targetCnt++
+                }
+                else -> {
+                    compareCnt++
+                }
             }
 
             if (targetCnt == compareCnt) {

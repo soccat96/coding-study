@@ -5,7 +5,7 @@ class SubString {
         var answer = 0
         var ss = s
         var sCnt = s.length
-        var target: Char? = null
+        var target = Char.MIN_VALUE
         var targetCnt = 0
         var compareCnt = 0
 
@@ -17,7 +17,7 @@ class SubString {
             ss = ss.substring(1, ss.length)
 
             when (target) {
-                null -> {
+                Char.MIN_VALUE -> {
                     target = first
                     targetCnt++
                 }
@@ -31,7 +31,7 @@ class SubString {
 
             if (targetCnt == compareCnt) {
                 answer++
-                target = null
+                target = Char.MIN_VALUE
                 targetCnt = 0
                 compareCnt = 0
             }

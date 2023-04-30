@@ -14,10 +14,10 @@ class MakeHamburger {
             if (stack.size >= burger.length) {
                 var str = ""
                 repeat(burger.length) {
-                    str += stack[stack.size - (it+1)]
+                    str += stack[stack.size - burger.length + it]
                 }
 
-                if (burger == str.reversed()) {
+                if (burger == str) {
                     answer++
                     repeat(burger.length) {
                         stack.pop()

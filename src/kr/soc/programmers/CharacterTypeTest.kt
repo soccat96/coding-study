@@ -6,7 +6,7 @@ class CharacterTypeTest {
         val map = mutableMapOf<String, Int>()
 
         for ((i, x) in survey.withIndex()) {
-            var key = ""
+            var key: String
             var num = choices[i] - 4
             if (list.indexOf(x) >= 0) {
                 key = x

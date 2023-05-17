@@ -4,14 +4,7 @@ class SuggestNewId {
     fun solution(new_id: String): String {
         val step1 = new_id.lowercase()
 
-        var step2 = "" // think filter
-        for (ch in step1) {
-            if (!(ch.isLowerCase() || ch.isDigit() || ch == '-' || ch == '_' || ch == '.')) {
-                step2 += ""
-            } else {
-                step2 += ch
-            }
-        }
+        val step2 = step1.filter { it.isLowerCase() || it.isDigit() || it == '-' || it == '_' || it == '.' }
 
         var step3 = ""
         var flag = false
@@ -30,11 +23,9 @@ class SuggestNewId {
             }
         }
 
-        step3 = step3.removePrefix(".")
-        step3 = step3.removeSuffix(".")
-        val step4 = step3
+        val step4 = step3.removePrefix(".").removeSuffix(".")
 
-        val step5 = if (step4.isEmpty()) "a" else step4
+        val step5 = step4.ifEmpty { "a" }
 
         var step6 = if (step5.length >= 16) step5.substring(0, 15) else step5
         step6 = step6.removeSuffix(".")

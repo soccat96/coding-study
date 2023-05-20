@@ -17,13 +17,13 @@ class TernarySystem {
 
         list.reverse()
         var sum = 0
-        for ((i, x) in list.withIndex()) {
+        for ((i, num) in list.withIndex()) {
             if (i == 0) {
-                sum += x
+                sum += num
                 continue
             }
 
-            sum += x * 3.0.pow(i.toDouble()).toInt()
+            sum += num * 3.0.pow(i.toDouble()).toInt()
         }
 
         return sum

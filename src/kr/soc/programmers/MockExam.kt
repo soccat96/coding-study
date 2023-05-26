@@ -12,11 +12,9 @@ class MockExam {
         val pattern3 = intArrayOf(3, 3, 1, 1, 2, 2, 4, 4, 5, 5).toList()
 
         val answersSize = answers.size
-        while (!(answers1.size >= answersSize && answers2.size >= answersSize && answers3.size >= answersSize)) {
-            if (answers1.size < answers.size) answers1.addAll(pattern1)
-            if (answers2.size < answers.size) answers2.addAll(pattern2)
-            if (answers3.size < answers.size) answers3.addAll(pattern3)
-        }
+        while (answers1.size < answersSize) answers1.addAll(pattern1)
+        while (answers2.size < answersSize) answers2.addAll(pattern2)
+        while (answers3.size < answersSize) answers3.addAll(pattern3)
 
         val cut1 = answers1.subList(0, answersSize)
         val cut2 = answers2.subList(0, answersSize)

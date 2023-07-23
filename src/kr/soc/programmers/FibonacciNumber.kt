@@ -15,7 +15,7 @@ class FibonacciNumber {
 
     /**
      * 동적 프로그래밍 Dynamic programing
-     *   작은 문제들의 반복 모임 = 큰 문제
+     *   작은 문제들의 반복 모임 = 큰 문제, 재귀? 1/f?
      *   top down - memoization 재귀?, bottom up - tabulation 반복문?
      * 모듈러 연산 modulo
      *   (A + B) % C ≡ ( ( A % C ) + ( B % C) ) % C

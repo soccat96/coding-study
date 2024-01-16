@@ -1,0 +1,145 @@
+# '쉬운코드' 유튜브 영상
+
+- 보수
+  - 어떤 값을 뺀 결과
+  - 컴퓨터 공학에서 뺄셈의 빌림수(borrow)를 해결하는 개념
+- 1의 보수
+  - 2진수의 0을 1로, 1을 0으로 바꾼다
+- 2의 보수
+  - 1의 보수에 1을 더한다
+
+- 프로그램(program)
+  - 컴퓨터가 실행할 수 있는 명령들의 집합
+- 프로세스(process)
+  - 컴퓨터에서 실행중인 프로그램
+  - 각각의 프로세스는 독립된 메모리 공간을 할당 받음 > 명령어와 데이터
+  - 최소 하나의 스레드를 가짐
+- 스레드(thread)
+  - cpu에서 실행되는 단위(unit of execution)
+  - 같은 프로세스 내의 스레드들끼리 컨텍스트 스위칭이 가벼움
+  - 스레드가 속한 프로세스의 메모리 영역 공유 > heap 공유
+- CPU bound 프로세스 > CPU 사용량이 많음
+  - CPU burst 가 많음 > 동영상 편집, 머신러닝
+  - 적절한 스레드의 수는 cpu 개수 or cpu 개수 + 1
+- IO bound 프로세스 > IO 작업이 많음
+  - IO burst 가 많음 > 일반적인 백엔드 API 서버
+  - 상황에 맞춰 적절한 스레드 개수 설정 필요
+- 동기화(synchronization)
+  - 여러 프로세스나 스레드를 동시에 실행해도 공유 데이터의 일관성을 유지하는 것
+- 임계 영역(critical section)
+  - 공유 데이터의 일관성을 보장하기 위해 하나의 프로세스/스레드만 진입해서 실행 가능한 영역
+  - 상호 배제(mutual exclusion)
+  - 진행(progress)
+  - 한정된 대기(bounded waiting)
+- CPU atomic 명령어
+  - 실행 중간에 간섭받거나 중단되지 않는다
+  - 같은 메모리 영역에 대해 동시에 실행되지 않는다
+- 스핀락(spinlock)
+  - 락을 가질 수 있을 때 까지 반복해서 실행
+  - 기다리는 동안 cpu 낭비
+- 뮤텍스(mutex)
+  - 락을 가질 수 있을 때 까지 휴식
+  - 멀티 코어 환경이고, critical section 작업이 context switching 보다 빨리 끝난다면 스핀락이 뮤텍스보다 이점이 있음
+  - 락을 가진 자만 락을 해제할 수 있음
+  - priority inheritance (우선순위를 높임) 속성을 가짐
+  - 상호 배제만 필요할 때
+- 세마포(semaphore)
+  - signal mechanism 을 가진 하나 이상의 프로세스/스레드가 critical section 에 접근 가능하도록 하는 장치
+  - 순서를 정해줄 때 사용
+  - 락을 누가 해제할 지 알 수 없음
+  - priority inheritance 속성 없음
+  - 작업 간의 실행 순서 동기화가 필요할 때
+- 모니터
+  - 한 번에 하나의 스레드만 실행 되어야 할 때
+  - 여러 스레드의 협업(cooperation)이 필요할 때
+  - mutex, condition variables 로 구성
+  - mutex
+    - critical section 에서 mutual exclusion 을 보장하는 장치
+    - critical section 에 진입 하려면 mutex lock 을 취득해야 함
+    - mutex lock 을 취득하지 못한 스레드는 큐에 들어간 후 대기(waiting) 상태로 전환
+  - condition variable
+    - waiting queue 를 가짐
+    - wait - 스레드가 자기 자신을 waiting queue 에 넣고 대기 상태로 전환
+    - signal - waiting queue 에서 대기 중인 하나의 스레드를 깨움
+    - broadcast - waiting queue 에서 대기 중인 모든 스레드를 깨움
+  - entry queue - critical section 에 진입을 기다리는 큐
+  - waiting queue - 조건이 충족되길 기다리는 큐
+  - Java 에서는 모든 객체가 모니터를 가지고 있다 synchronized
+  - java.util.concurrent
+
+
+- ADT(Abstract Data Type)
+  - 구조의 속성과 행위(operation)를 설명 What(O) How(X)
+  - ADT를 구현한 것이 자료구조(data structure)
+- stack
+  - Last In First Out, First In Last Out
+  - push, pop
+  - 예) Ctrl + z
+  - stack over flow
+- queue
+  - First In First Out, Last In Last Out
+  - 순서를 보장
+  - 예) 은행 번호표, 메세지
+  - out of memory > heap 에서 발생하는 경우가 있음, queue size 제한
+  - priority queue (ADT)
+    - 큐와 유사하나 우선순위가 높은 아이템이 먼저 처리됨
+  - heap (DS)
+    - 주로 2진 트리(binary tree) 기반으로 구현
+    - max heap
+      - 부모 노드의 키(key)가 자식 노드들의 키보다 크거나 같은 트리
+      - insert 일단 자료를 새로운 공간에 넣고 비교하여 위치를 찾음
+      - delete 일단 자료를 삭제하고 마지막 노드의 값을 가져와 채우고 비교하여 위치를 찾음
+    - min heap
+      - 부모 노드의 키(key)가 자식 노드들의 키보다 작거나 같은 트리
+- list
+  - 어떤 순서가 있는 데이터의 집합
+  - 중복 허용
+  - array list
+    - 연속적인 공간에 순차적으로 데이터를 저장
+    - indexing 가능
+    - 중간 데이터 삽입과 최대 사이즈 확장의 어려움
+  - linked list
+    - 비연속적인 공간에 순차적으로 데이터를 저장
+    - 추가/삭제가 쉬움
+    - 위치 탐색에 오래 걸림
+    - ArrayList 에 비해 용량 소모가 더 큼
+- set
+  - 순서를 보장 하지 않음
+  - 중복을 허용하지 않음
+  - hash set
+    - hash map 으로 내부 구현 되어 있음
+    - value에는 dummy 값을 넣음
+- map
+  - key, value 형태로 데이터를 저장
+  - key는 항상 유일함
+  - hash Map
+    - key, value를 hash function을 사용해서 저장
+    - 삽입, 삭제, 갱신, 탑색이 O(1)(상수 시간)에 처리 됨 - 배열로 구현되어 있기 때문
+    - hash function
+      - 키를 배열 크기 내의 index로 바꿔주는 함수
+      - hash collision(해시 충돌)을 해결해야 함
+      - 반환 값이 정수여야 함
+    - array[ hash_function(key) % hash_map_size ] = value
+    - hash_function(key) % hash_map_size의 충돌을 해결해야 함
+    - hash collision 해결 방법
+      - separate chaining
+        - 추가적인 공간을 활용하여 해결
+        - linked list 사용
+        - 데이터 자리에 linked list의 노드를 가리키는 값을 넣음
+        - 중복이 생기면 linked list의 head 자리어 넣음
+        - jdk7에서는 linked list 만 활용
+        - jdk8에서는 linked list, red black tree 활용
+      - open addressing
+        - 충돌 발생 시에 비어있는 인접 공간(bucket)에 저장
+        - 중간 연결고리 혁할을 하는 key 삭제 시, 이미 있는 값도 없다고 판단할 수 있음
+          - 삭제룰 특별하게 표시 함
+          - 데이터 이동
+        - linear probing
+          - 고정 폭으로 이동하여 빈 공간을 찾음
+        - quadratic probing
+          - 제곱수로 이동하여 빈 공간을 찾음
+        - double hashing
+          - 또 다른 hash function을 사용하여 빈 공간을 찾음
+  - sorted map
+    - key, value를 key에 대하여 정렬하여 저장
+    - concurrent skip list map, tree map

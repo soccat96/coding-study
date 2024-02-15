@@ -66,6 +66,48 @@
   - waiting queue - 조건이 충족되길 기다리는 큐
   - Java 에서는 모든 객체가 모니터를 가지고 있다 synchronized
   - java.util.concurrent
+- 데드락, 교착상태(deadlock)
+  - 두 개 이상의 프로세스 혹은 스레드가 서로가 가진 리소스를 기다리는 상태
+  - 교차로의 4개 차량
+    - 조건 1 Mutual exclusion: 리소스(resource)를 공유해서 사용할 수 없다
+    - 조건 2 Hold and wait: 프로세스가 이미 하나 이상의 리소스를 취득한(hold) 상태에서 다른 프로세스가 사용하고 있는 리소스를 추가로 기다린다(wait)
+    - 조건 3 No preemption: 리소스 반환(release)은 오직 그 리소스를 취득한 프로세스만 할 수 있다
+    - 조건 4 Circular wait: 프로세스들이 순환(circular) 형태로 서로의 리소스를 기다린다
+  - OS의 데드락 해결 방법
+    - 데드락 방지(prevention): 네 가지 조건 중 하나가 충족되지 않게 시스템을 디자인
+      - 조건1 해결: 리소스를 공유 가능하게 함, 현실적으로 맞지 않음
+      - 조건2 해결: 사용할 리소스들을 모두 획득한 뒤에 시작, 리소스를 전혀 가지지 않은 상태에서만 리소스 요청
+      - 조건3 해결: 추가적인 리소스를 기다려야 한다면 이미 획득한 리소스를 다른 프로세스가 선점 가능하도록 한다
+      - 조건4 해결: 모든 프로세스에 순서 체계를 부여해서 오름차순으로 리소스를 요청 
+    - 데드락 회피(avoidance): 실행환경에서 추가적인 정보를 활용해서 데드락이 발생할 것 같은 상황을 회피하는 것
+      - Banker algorithm: 리소스 요청을 허락 해줬을 때 데드락이 발생할 가능성이 있으면 리소스를 할당해도 안전할 때까지 계속해서 요청을 거절하는 알고리즘
+    - 데드락 감지와 복구: 데드락을 허용하고 데드락이 발생하면 복구하는 전략
+      - 프로세스를 종료
+      - 리소스의 일시적인 선점을 허용
+    - 데드락 무시: 개발자에게 맏김
+- 프로세스의 상태
+  - OS process
+    - new > ready > running > waiting > terminating, ready > running > waiting > ready ... 반복될 수 있음
+  - Java thread
+    - new: 아직 시작하지 않은 상태
+    - terminated: 실행을 마치고 종료된 상태
+    - waiting: 다른 스레드를 기다라는 상태 Object.wait, Thread.join
+    - timed waiting: 제한 시간을 두고 다른 스레드를 기다리는 상태 Object.wait with timeout, Thread.join with timeout, Thread.sleep
+    - blocked: critical section 으로 들어가려고 모니터락을 얻기 위해 기다리는 상태 
+    - runnable: 실행중인 상태, 다른 리소스를 기다리는 상태도 포함
+  - Java thread dump: 실행 중인 자바 프로세스의 현재 상태를 담은 스냅 샷
+- CPU scheduler: CPU 에서 실행 될 프로세스를 선택하는 역할
+- dispatcher: 선택된 프로세스에게 CPU 를 할당하는 역할(context switching, kernel > user mode, 적절한 위치로 이동)
+- scheduling 선점 방식
+  - 비선점(non preemptive): 신사적, 협력적(cooperative), 느린 응답성
+  - 선점(preemptive): 적극적, 강제적, 빠른 응답성, 데이터 일관성 문제
+- scheduling algorithm
+  - FCFS(First Come, First Served): 먼저 도착한 순서대로 처리
+  - SJF(Shortest Job First): 프로세스의 다음 CPU burst 가 가장 짧은 프로세스부터 실행
+  - SRTF(Shortest remaining time first): 남은 CPU burst 가 가장 짧은 프로세스부터 실행
+  - Priority: 우선 순위가 높은 프로세스부터 실행
+  - RR(Round Robin): time slice 로 나눠진 CPU time 을 번갈아가며 실행
+  - Multilevel queue: 프로세스들을 그룹화해서 그룹마다 큐를 두는 방식
 
 
 - ADT(Abstract Data Type)
